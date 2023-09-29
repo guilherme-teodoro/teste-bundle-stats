@@ -18,9 +18,7 @@ jobs:
       - run:
           name: build main baseline
           command: |
-            npm run build
-          environment:
-            BUNDLE_STATS_BASELINE: true
+            BUNDLE_STATS_BASELINE=true npm run build
       - run: git checkout "$CIRCLE_BRANCH"
       - run: npm install
       - run:
