@@ -1,0 +1,21 @@
+version: 2.1
+
+jobs:
+  build_2:
+    # Reuse Docker container specification given by the node Orb
+    executor: node/default
+    steps:
+      # - checkout
+      - run: git clone -b main "$CIRCLE_REPOSITORY_URL"
+      # Install the latest npm - the node Orb takes care of it
+      - node/install-npm
+      # Install dependencies - the node Orb take care of installation and dependency caching
+      # Save workspace for subsequent jobs (i.e. test)
+      - run: BUNDLE_STATS_BASELINE=true npm run build
+      - run: git checkout "$CIRCLE_BRANCH"
+      - run: rpm run build
+
+workflows:
+  build_and_test:
+    jobs:
+      - build_2
