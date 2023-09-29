@@ -1,16 +1,20 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@5.1.0
+
 jobs:
-  build_2:
-    # Reuse Docker container specification given by the node Orb
-    executor: node/default
+  install-node-example:
+    docker:
+      - image: cimg/base:stable
     steps:
-      # - checkout
+      - checkout
+      - node/install:
+          install-yarn: true
+          node-version: "16.13"
+      - run: node --version
       - run: git clone -b main "$CIRCLE_REPOSITORY_URL"
-      # Install the latest npm - the node Orb takes care of it
-      - node/install-npm
-      # Install dependencies - the node Orb take care of installation and dependency caching
-      # Save workspace for subsequent jobs (i.e. test)
+      - run: npm install
       - run: BUNDLE_STATS_BASELINE=true npm run build
       - run: git checkout "$CIRCLE_BRANCH"
       - run: rpm run build
@@ -18,4 +22,4 @@ jobs:
 workflows:
   build_and_test:
     jobs:
-      - build_2
+      - install-node-example
