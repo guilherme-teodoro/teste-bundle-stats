@@ -17,7 +17,7 @@ jobs:
       - run: npm install
       - run: BUNDLE_STATS_BASELINE=true npm run build
       - run: git checkout "$CIRCLE_BRANCH"
-      - run: rpm run build
+      - run: npm run build
 
 workflows:
   build_and_test:
