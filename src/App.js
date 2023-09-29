@@ -1,6 +1,5 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { format } from "date-fns";
 
 function App() {
   return (
@@ -10,7 +9,6 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        {format(new Date(Date.now()), "dd-mm-yyyy")}
         <a
           className="App-link"
           href="https://reactjs.org"
