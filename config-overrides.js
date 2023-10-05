@@ -6,6 +6,7 @@ module.exports = override(
     new BundleStatsWebpackPlugin({
       json: true,
       html: false,
+      baselineFilepath: "../baseline-stats.json",
     }),
   ),
 );
