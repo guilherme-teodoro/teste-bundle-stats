@@ -11,20 +11,24 @@ jobs:
       - checkout
       - node/install:
           install-yarn: true
-          node-version: "16.13"
+          node-version: "18.17.0"
       - run: node --version
       - run: git checkout main
-      - run: npm install
+      - run: yarn
       - run:
           name: build main baseline
           command: |
             BUNDLE_STATS_BASELINE=true npm run build
       - run: git checkout "$CIRCLE_BRANCH"
-      - run: npm install
+      - run: yarn
       - run:
           name: build branch baseline
           command: |
             npm run build
+      - run:
+          name: build branch baseline
+          command: |
+            node ./scripts/size-bot.js
 
 workflows:
   build_and_test:
