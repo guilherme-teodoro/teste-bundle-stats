@@ -7,7 +7,9 @@ const { BundleStatsWebpackPlugin } = require("bundle-stats-webpack-plugin");
 module.exports = override(
   addWebpackPlugin(
     new BundleStatsWebpackPlugin({
-      baselineFilepath: "../stats.json",
+      html: false,
+      json: true,
+      baselineFilepath: "../baseline-stats.json",
     }),
   ),
 );
